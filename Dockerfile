@@ -1,19 +1,20 @@
-FROM ubuntu:latest
+FROM ubuntu:xenial
 MAINTAINER Manuel Fuentes Jimenez<m92fuentes@gmail.com>
 
 ENV DEBIAN_FRONTEND noninteractive
-#COPY root /
-RUN jodo apt-get update \
-    && jodo apt-get install -y software-properties-common \
+COPY jodo /bin/
+COPY proxy.conf /etc/apt/apt.conf.d/
+RUN  apt-get update 
+RUN  apt-get install -y software-properties-common \
     && add-apt-repository 'deb http://es.archive.ubuntu.com/ubuntu/ xenial main restricted universe multiverse' \
-    && jodo add-apt-repository ppa:ubuntugis/ppa \
-    && jodo apt-get update \
-    && jodo apt-get install -y \
+#    &&  add-apt-repository ppa:ubuntugis/ppa \
+#    &&  apt-get update \
+    && apt-get install -y \
        autoconf \
        autotools-dev \
        build-essential
 
-RUN jodo apt-get install -y \
+RUN apt-get install -y \
     csh \
     gfortran \
     gfortran-5-multilib \
@@ -47,7 +48,7 @@ RUN jodo apt-get install -y \
     python3-numpy \
     curl
 
-RUN jodo apt-get install -y \
+RUN apt-get install -y \
        python \
        python-matplotlib \
        python-numpy \
@@ -76,11 +77,18 @@ ENV JASPERINC=$PREFIX/include
 ENV ARW_CONFIGURE_OPTION 3
 ENV PYTHONPATH $PREFIX/lib/python2.7/site-packages
 ENV PATH $PATH:$PREFIX/bin:$NCARG_ROOT/bin:$PREFIX/WPS:$PREFIX/WRFV3/test/em_real:$PREFIX/WRFV3/main:$PREFIX/WRFV3/run:$PREFIX/WPS:$PREFIX/ARWpost:$PREFIX
+ENV HTTPS_PROXY=http://miguel.hinojosa:CoalBitminer@10.0.100.191:3128/
+ENV HTTP_PROXY=http://miguel.hinojosa:CoalBitminer@10.0.100.191:3128/
+
 RUN mkdir -p /home/wrf && \
     useradd wrf -d /home/wrf && \
     chown -R wrf:wrf /home/wrf
 RUN ulimit -s unlimited
 USER wrf
+COPY build.sh /home/wrf
+COPY .gitconfig /home/wrf
+COPY .wgetrc /home/wrf
+
 RUN ./build.sh
 COPY entrypoint.sh $PREFIX
 ENTRYPOINT ["entrypoint.sh"]

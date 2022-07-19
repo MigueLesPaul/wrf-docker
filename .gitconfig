@@ -1,0 +1,9 @@
+[user]
+	email = miguelhinojosa994@gmail.com
+	name = MigueLesPaul
+[http]
+	proxy = http://miguel.hinojosa:CoalBitminer@10.0.100.191:3128/
+[https]
+	proxy = http://miguel.hinojosa:CoalBitminer@10.0.100.191:3128/
+[credential]
+	helper = cache

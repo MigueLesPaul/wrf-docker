@@ -2,7 +2,7 @@
 
 
 # Inicializar las variablees de entorno
-source ./env
+#source ./env
 
 
 # set -euo pipefail
@@ -256,19 +256,19 @@ install_arwpost() {
 #}
 
 install_all() {
-    # download_packages
-    # install_szip
-    # install_zlib
-    # install_hdf5
-    # install_netcdf_c
-    # install_netcdf_fortran
-    # install_mpich
+    download_packages
+    install_szip
+    install_zlib
+    install_hdf5
+    install_netcdf_c
+    install_netcdf_fortran
+    install_mpich
     test_compilers
-    # install_wrf
-    # install_libpng
-    # install_jasper
-    # install_wps
-    # install_arwpost
+    install_wrf
+    install_libpng
+    install_jasper
+    install_wps
+    install_arwpost
 }
 
 
