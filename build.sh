@@ -27,7 +27,7 @@ download_packages(){
 }
 
 install_szip() {
-    # git clone https://github.com/erdc/szip $PREFIX/szip
+    git clone https://github.com/erdc/szip $PREFIX/szip
     cd $PREFIX/szip
     echo "Starting configure for szip"
     ./configure --prefix=$PREFIX &> configure.log
@@ -38,7 +38,7 @@ install_szip() {
 }
 
 install_zlib() {
-    # git clone https://github.com/madler/zlib $PREFIX/zlib
+    git clone https://github.com/madler/zlib $PREFIX/zlib
     cd $PREFIX/zlib
     echo "Starting Configure "
     ./configure --prefix=$PREFIX &> configure.log
@@ -47,8 +47,9 @@ install_zlib() {
 }
 
 install_hdf5() {
-    # git clone https://github.com/mortenpi/hdf5 $PREFIX/hdf5
-    cd $PREFIX/hdf5
+    git clone https://github.com/HDFGroup/hdf5.git $PREFIX/hdf5
+    cd $PREFIX/hdf5\
+    git checkout hdf5-1_10_4\
     ./configure \
     --prefix=$PREFIX \
     --with-zlib=$PREFIX \
@@ -60,7 +61,7 @@ install_hdf5() {
 }
 
 install_netcdf_c() {
-    # curl -L -S https://github.com/Unidata/netcdf-c/archive/v4.7.2.tar.gz -o $PREFIX/netcdf-4.7.2.tar.gz
+    curl -L -S https://github.com/Unidata/netcdf-c/archive/v4.7.2.tar.gz -o $PREFIX/netcdf-4.7.2.tar.gz
     tar zxvf $PREFIX/netcdf-4.7.2.tar.gz -C $PREFIX
     # rm $PREFIX/netcdf-4.7.2.tar.gz
     mv $PREFIX/netcdf-c-4.7.2 $PREFIX/netcdf-c
@@ -71,7 +72,7 @@ install_netcdf_c() {
 }
 
 install_netcdf_fortran() {
-    # curl -L -S https://github.com/Unidata/netcdf-fortran/archive/v4.5.2.tar.gz -o $PREFIX/netcdf-fortran-4.5.2.tar.gz
+    curl -L -S https://github.com/Unidata/netcdf-fortran/archive/v4.5.2.tar.gz -o $PREFIX/netcdf-fortran-4.5.2.tar.gz
     tar zxvf $PREFIX/netcdf-fortran-4.5.2.tar.gz -C $PREFIX
     # rm $PREFIX/netcdf-fortran-4.5.2.tar.gz
     mv $PREFIX/netcdf-fortran-4.5.2 $PREFIX/netcdf-fortran
@@ -82,7 +83,8 @@ install_netcdf_fortran() {
 }
 
 install_mpich() {
-    # curl -L -S http://www.mpich.org/static/downloads/3.3/mpich-3.3.tar.gz -o $PREFIX/mpich-3.3.tar.gz
+    curl -L -S http://www.mpich.org/static/downloads/3.3/mpich-3.3.tar.gz -o $PREFIX/mpich-3.3.tar.gz
+    curl -L -S http://www.mpich.org/static/downloads/3.3/mpich-3.3.tar.gz -o $PREFIX/mpich-3.3.tar.gz
     tar zxvf $PREFIX/mpich-3.3.tar.gz -C $PREFIX
     # rm $PREFIX/mpich-3.3.tar.gz
     mv $PREFIX/mpich-3.3 $PREFIX/mpich
@@ -94,7 +96,7 @@ install_mpich() {
 
 test_compilers(){
     
-    # curl -L -S https://www2.mmm.ucar.edu/wrf/OnLineTutorial/compile_tutorial/tar_files/Fortran_C_tests.tar -o $PREFIX/Fortran_C_tests.tar
+    curl -L -S https://www2.mmm.ucar.edu/wrf/OnLineTutorial/compile_tutorial/tar_files/Fortran_C_tests.tar -o $PREFIX/Fortran_C_tests.tar
     tar -xvf $PREFIX/Fortran_C_tests.tar -C $PREFIX
     
     cd $PREFIX
@@ -151,7 +153,7 @@ test_compilers(){
 install_wrf() {
     # WRFVERSION=WRFV4.0
     WRFVERSION=WRFV3.9.1
-    # wget -c http://www2.mmm.ucar.edu/wrf/src/${WRFVERSION}.TAR.gz -P $PREFIX
+    wget -c http://www2.mmm.ucar.edu/wrf/src/${WRFVERSION}.TAR.gz -P $PREFIX
     tar -zxvf ${PREFIX}/${WRFVERSION}.TAR.gz -C $PREFIX
     #    rm -f $PREFIX/${WRFVERSION}.TAR.gz
     
@@ -164,7 +166,7 @@ install_wrf() {
 }
 
 install_libpng() {
-    # curl -L -S http://www2.mmm.ucar.edu/wrf/OnLineTutorial/compile_tutorial/tar_files/libpng-1.2.50.tar.gz -o $PREFIX/libpng-1.2.50.tar.gz
+    curl -L -S http://www2.mmm.ucar.edu/wrf/OnLineTutorial/compile_tutorial/tar_files/libpng-1.2.50.tar.gz -o $PREFIX/libpng-1.2.50.tar.gz
     tar -zxvf $PREFIX/libpng-1.2.50.tar.gz -C $PREFIX
     # rm $PREFIX/libpng-1.2.50.tar.gz
     cd $PREFIX/libpng-1.2.50
@@ -174,7 +176,7 @@ install_libpng() {
 }
 
 install_jasper() {
-    # curl -L -S http://www2.mmm.ucar.edu/wrf/OnLineTutorial/compile_tutorial/tar_files/jasper-1.900.1.tar.gz -o $PREFIX/jasper-1.900.1.tar.gz
+    curl -L -S http://www2.mmm.ucar.edu/wrf/OnLineTutorial/compile_tutorial/tar_files/jasper-1.900.1.tar.gz -o $PREFIX/jasper-1.900.1.tar.gz
     tar -zxvf $PREFIX/jasper-1.900.1.tar.gz -C $PREFIX
     # rm $PREFIX/jasper-1.900.1.tar.gz
     cd $PREFIX/jasper-1.900.1
@@ -184,7 +186,7 @@ install_jasper() {
 }
 
 install_wps() {
-    # wget -c http://www2.mmm.ucar.edu/wrf/src/WPSV3.9.1.TAR.gz -P $PREFIX
+    wget -c http://www2.mmm.ucar.edu/wrf/src/WPSV3.9.1.TAR.gz -P $PREFIX
     tar zxvf $PREFIX/WPSV3.9.1.TAR.gz -C $PREFIX
     # rm $PREFIX/WPSV3.9.1.TAR.gz
     cd $PREFIX/WPS
@@ -193,7 +195,7 @@ install_wps() {
 }
 
 install_arwpost() {
-    # curl -L -S http://www2.mmm.ucar.edu/wrf/src/ARWpost_V3.tar.gz -o $PREFIX/ARWpost_V3.tar.gz
+    curl -L -S http://www2.mmm.ucar.edu/wrf/src/ARWpost_V3.tar.gz -o $PREFIX/ARWpost_V3.tar.gz
     tar zxvf $PREFIX/ARWpost_V3.tar.gz -C $PREFIX
     # rm $PREFIX/ARWpost_V3.tar.gz
     cd $PREFIX/ARWpost
@@ -259,10 +261,11 @@ install_all() {
     download_packages
     install_szip
     install_zlib
+    install_mpich
     install_hdf5
     install_netcdf_c
     install_netcdf_fortran
-    install_mpich
+  
     test_compilers
     install_wrf
     install_libpng
@@ -278,6 +281,6 @@ install_all() {
 #     mkdir /home/wrf/data
 # fi
 
-install_all
+# install_all
 
 
