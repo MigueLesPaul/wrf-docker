@@ -1,7 +1,7 @@
 export PREFIX=$(pwd)/wrf
 export WORKDIR=${PREFIX}/wrf
 export DEBIAN_FRONTEND=noninteractive
-export CC="gcc"
+export CC="gcc -fPIC"
 export CPP="/usr/bin/cpp -P"
 export CXX="g++"
 export FC="gfortran"
