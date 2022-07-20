@@ -90,7 +90,7 @@ RUN mkdir -p /home/wrf && \
 RUN ulimit -s unlimited
 USER wrf
 COPY build.sh /home/wrf
-COPY .wgetrc /home/wrf
+COPY .wgetrc /etc/wgetrc
 
 
 #Download Libraries    #fijarse en la versión de WPS
