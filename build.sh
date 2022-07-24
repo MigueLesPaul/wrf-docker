@@ -151,15 +151,15 @@ test_compilers(){
 }
 
 install_wrf() {
-    WRFVERSION=WRFV4.0
+    # WRFVERSION=WRFV4.0
     # WRFVERSION=WRFV3.9.1
-    wget -c http://www2.mmm.ucar.edu/wrf/src/${WRFVERSION}.TAR.gz -P $PREFIX
-    tar -zxvf ${PREFIX}/${WRFVERSION}.TAR.gz -C $PREFIX
+    wget -c https://github.com/wrf-model/WRF/archive/refs/tags/v4.1.1.tar.gz -O $PREFIX/${WRFVERSION}.tar.gz
+    tar -zxvf ${PREFIX}/${WRFVERSION}.tar.gz -C $PREFIX
     #    rm -f $PREFIX/${WRFVERSION}.TAR.gz
     
     #    Cambiado codigo fuente, se aumento las dimensiones de la variable seed. En caso contrario no compila el codigo
     #    archivo WRFV3/phys/module_cu_g3.F   linea  3125
-    cd $PREFIX/WRFV3
+    cd $PREFIX/${WRFVERSION}
     # cd $PREFIX/WRF     ####  Version4
     echo $WRF_CONFIGURE_OPTION | ./configure &> configure.log
     ./compile em_real &> install.log
@@ -186,9 +186,9 @@ install_jasper() {
 }
 
 install_wps() {
-    wget -c http://www2.mmm.ucar.edu/wrf/src/WPSV3.9.1.TAR.gz -P $PREFIX
-    tar zxvf $PREFIX/WPSV3.9.1.TAR.gz -C $PREFIX
-    # rm $PREFIX/WPSV3.9.1.TAR.gz
+    wget -c https://github.com/wrf-model/WPS/archive/refs/tags/v4.1.tar.gz -O $PREFIX/WPS.tar.gz
+    tar zxvf $PREFIX/WPS.tar.gz -C $PREFIX
+
     cd $PREFIX/WPS
     echo 1 | NCARG_ROOT=$PREFIX PATH=$NCARG_ROOT/bin:$PATH NETCDF=$PREFIX JASPERLIB=$PREFIX/lib JASPERINC=$PREFIX/include ./configure &> configure.log
     ./compile &> install.log
@@ -258,7 +258,7 @@ install_arwpost() {
 #}
 
 install_all() {
-    download_packages
+    # download_packages
     install_szip
     install_zlib
     install_mpich
