@@ -27,7 +27,7 @@ download_packages(){
 }
 
 install_szip() {
-    git clone https://github.com/erdc/szip $PREFIX/szip
+    #git clone https://github.com/erdc/szip $PREFIX/szip
     cd $PREFIX/szip
     echo "Starting configure for szip"
     ./configure --prefix=$PREFIX &> configure.log
@@ -38,7 +38,7 @@ install_szip() {
 }
 
 install_zlib() {
-    git clone https://github.com/madler/zlib $PREFIX/zlib
+    # git clone https://github.com/madler/zlib $PREFIX/zlib
     cd $PREFIX/zlib
     echo "Starting Configure "
     ./configure --prefix=$PREFIX &> configure.log
@@ -47,7 +47,7 @@ install_zlib() {
 }
 
 install_hdf5() {
-    git clone https://github.com/HDFGroup/hdf5.git $PREFIX/hdf5
+   # git clone https://github.com/HDFGroup/hdf5.git $PREFIX/hdf5
     cd $PREFIX/hdf5\
     git checkout hdf5-1_10_4\
     ./configure \
@@ -67,18 +67,18 @@ install_netcdf_c() {
     # rm $PREFIX/netcdf-4.7.2.tar.gz
     mv $PREFIX/netcdf-c-4.7.2 $PREFIX/netcdf-c
     cd $PREFIX/netcdf-c
-    LD_LIBRARY_PATH=$PREFIX/lib CPPFLAGS=-I$PREFIX/include LDFLAGS=-L$PREFIX/lib ./configure --prefix=$PREFIX --disable-dap --disable-netcdf-4 --disable-shared &> configure.log
+    LD_LIBRARY_PATH=$PREFIX/lib CPPFLAGS=-I$PREFIX/include LDFLAGS=-L$PREFIX/lib  ./configure --prefix=$PREFIX --disable-dap --disable-netcdf-4 --disable-shared &> configure.log
     make
     make install &> install.log
 }
 
 install_netcdf_fortran() {
-    wget -c https://github.com/Unidata/netcdf-fortran/archive/v4.5.2.tar.gz -o $PREFIX/netcdf-fortran-4.5.2.tar.gz
+    wget -c https://github.com/Unidata/netcdf-fortran/archive/refs/tags/v4.5.2.tar.gz -O $PREFIX/netcdf-fortran-4.5.2.tar.gz
     tar zxvf $PREFIX/netcdf-fortran-4.5.2.tar.gz -C $PREFIX
     # rm $PREFIX/netcdf-fortran-4.5.2.tar.gz
     mv $PREFIX/netcdf-fortran-4.5.2 $PREFIX/netcdf-fortran
     cd $PREFIX/netcdf-fortran
-    CPPFLAGS="-I$PREFIX/include" LDFLAGS="-L$PREFIX/lib" LD_LIBRARY_PATH=$PREFIX/lib LIBS="-lnetcdf -lhdf5_hl -lhdf5 -lz " ./configure --disable-shared --prefix=$PREFIX &> configure.log
+    CPPFLAGS="-I$PREFIX/include" LDFLAGS="-L$PREFIX/lib" LD_LIBRARY_PATH=$PREFIX/lib LIBS="-lnetcdf -lhdf5_hl -lhdf5 -lz "  ./configure --disable-shared --prefix=$PREFIX &> configure.log
     make
     make install &> install.log
 }
@@ -170,13 +170,13 @@ install_libpng() {
     tar -zxvf $PREFIX/libpng-1.2.50.tar.gz -C $PREFIX
     # rm $PREFIX/libpng-1.2.50.tar.gz
     cd $PREFIX/libpng-1.2.50
-    CPPFLAGS=-I$PREFIX/include LDFLAGS=-L$PREFIX/lib ./configure --prefix=$PREFIX &> configure.log
+    CPPFLAGS=-I$PREFIX/include LDFLAGS=-L$PREFIX/lib && ./configure --prefix=$PREFIX &> configure.log
     make
     make install &> install.log
 }
 
 install_jasper() {
-    wget http://www2.mmm.ucar.edu/wrf/OnLineTutorial/compile_tutorial/tar_files/jasper-1.900.1.tar.gz -P $PREFIX
+    wget -c  http://www2.mmm.ucar.edu/wrf/OnLineTutorial/compile_tutorial/tar_files/jasper-1.900.1.tar.gz -P $PREFIX
     tar -zxvf $PREFIX/jasper-1.900.1.tar.gz -C $PREFIX
     # rm $PREFIX/jasper-1.900.1.tar.gz
     cd $PREFIX/jasper-1.900.1
@@ -190,7 +190,7 @@ install_wps() {
     tar zxvf $PREFIX/WPS.tar.gz -C $PREFIX
 
     cd $PREFIX/WPS
-    echo 1 | NCARG_ROOT=$PREFIX PATH=$NCARG_ROOT/bin:$PATH NETCDF=$PREFIX JASPERLIB=$PREFIX/lib JASPERINC=$PREFIX/include ./configure &> configure.log
+    echo 1 | NCARG_ROOT=$PREFIX PATH=$NCARG_ROOT/bin:$PATH NETCDF=$PREFIX JASPERLIB=$PREFIX/lib JASPERINC=$PREFIX/include && ./configure &> configure.log
     ./compile &> install.log
 }
 
@@ -281,6 +281,6 @@ install_all() {
 #     mkdir /home/wrf/data
 # fi
 
-# install_all
+#install_all
 
 
