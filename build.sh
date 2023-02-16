@@ -281,6 +281,6 @@ install_all() {
 #     mkdir /home/wrf/data
 # fi
 
-#install_all
+install_all
 
 

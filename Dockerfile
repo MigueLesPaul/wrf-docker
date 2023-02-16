@@ -1,8 +1,7 @@
 FROM ubuntu:xenial
-MAINTAINER Manuel Fuentes Jimenez<m92fuentes@gmail.com>, Miguel Hinojosa<miguelhinojosa994@gmail.com>
 
 ENV DEBIAN_FRONTEND noninteractive
-COPY jodo /bin/
+#COPY jodo /bin/
 # COPY proxy.conf /etc/apt/apt.conf.d/   ## IF proxy settings are needed
 RUN  apt-get update 
 RUN  apt-get install -y software-properties-common 
